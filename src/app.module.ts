@@ -15,6 +15,8 @@ import { CategoryModule } from './category/category.module';
 import { Category } from './category/entities/category.entity';
 import { ProfileModule } from './profile/profile.module';
 import { Profile } from './profile/entities/profile.entity';
+import { FollowersModule } from './followers/followers.module';
+import { Follower } from './followers/entities/follower.entity';
 
 @Module({
   imports: [TypeOrmModule.forRoot({
@@ -24,7 +26,7 @@ import { Profile } from './profile/entities/profile.entity';
     type: 'postgres',
     password: '1111',
     database: 'blog',
-    entities: [User, Post, Comment, Like, Category, Profile],
+    entities: [User, Post, Comment, Like, Category, Profile, Follower],
     synchronize: true
   }),
 UsersModule,
@@ -33,7 +35,8 @@ PostsModule,
 CommentModule,
 LikeModule,
 CategoryModule,
-ProfileModule
+ProfileModule,
+FollowersModule
 ],
   controllers: [AppController],
   providers: [AppService],

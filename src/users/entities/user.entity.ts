@@ -1,4 +1,5 @@
 import { Comment } from "src/comment/entities/comment.entity";
+import { Follower } from "src/followers/entities/follower.entity";
 import { Like } from "src/like/entities/like.entity";
 import { Post } from "src/posts/entities/post.entity";
 import { Profile } from "src/profile/entities/profile.entity";
@@ -39,7 +40,13 @@ export class User {
     @OneToOne(() => Profile, (profile) => profile.user, { cascade: true})
     @JoinColumn()
     profile: Profile;
- 
+
+    @OneToMany(() => Follower, (follower) => follower.following, { cascade: true})
+    followers: Follower[];
+
+    @OneToMany(() => Follower, (follower) => follower.follower, { cascade: true})
+    following: Follower[];
+
     @CreateDateColumn()
     createdAt: Date;
 }
