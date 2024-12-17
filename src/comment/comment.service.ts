@@ -14,25 +14,49 @@ export class CommentService {
     @InjectRepository(User) private userRepository: Repository<User>,
   ) {}
 
-  async create(createCommentDto: CreateCommentDto, userId: number): Promise<Comment> {
-    const post = await this.postRepository.findOne({ where: { id: createCommentDto.postId } });
+  async createComment(dto: CreateCommentDto): Promise<Comment> {
+    const { text, parentId, postId } = dto;
+  
+    const comment = new Comment();
+    comment.text = text;
+  
+    const post = await this.postRepository.findOne({ where: { id: postId } });
     if (!post) {
       throw new NotFoundException('Post not found');
     }
-
-    const user = await this.userRepository.findOne({ where: { id: userId } });
-    if (!user) {
-      throw new NotFoundException('User not found');
+    comment.post = post;
+  
+    if (parentId) {
+      const parentComment = await this.commentRepository.findOne({ where: { id: parentId } });
+      if (!parentComment) {
+        throw new NotFoundException('Parent comment not found');
+      }
+      comment.parent = parentComment;
     }
-
-    const comment = this.commentRepository.create({
-      ...createCommentDto,
-      user,
-      post,
-    });
-
+  
     return this.commentRepository.save(comment);
   }
+
+  async getComments(postId: number): Promise<Comment[]> {
+    const comments = await this.commentRepository.find({
+      where: { post: { id: postId }, parent: null }, // Faqat root kommentariyalar
+      relations: ['replies'], // Javoblarni yuklash
+    });
+  
+    // Rekursiv tarzda replies bilan to'ldirish
+    return this.loadReplies(comments);
+  }
+  
+  private async loadReplies(comments: Comment[]): Promise<Comment[]> {
+    for (const comment of comments) {
+      const replies = await this.commentRepository.find({
+        where: { parent: { id: comment.id } },
+        relations: ['replies'], // Repliesni ham yuklash
+      });
+      comment.replies = await this.loadReplies(replies); // Rekursiv chaqiriq
+    }
+    return comments;
+  }  
 
   async findByPost(postId: number): Promise<Comment[]> {
     return this.commentRepository.find({

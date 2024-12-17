@@ -7,11 +7,9 @@ import { AuthGuard } from 'src/auth/auth.guard';
 export class CommentController {
   constructor(private readonly commentService: CommentService) {}
 
-  @UseGuards(AuthGuard)
   @Post()
-  create(@Body() createCommentDto: CreateCommentDto, @Req() req: any) {
-    const userId = req.user.id
-    return this.commentService.create(createCommentDto, userId);
+  async createComment(@Body() dto: CreateCommentDto) {
+    return this.commentService.createComment(dto);
   }
 
   @Get(':postId')
