@@ -15,6 +15,15 @@ title: string;
 @Column()
 content: string;
 
+@Column({ default: 0})
+views: number;
+
+@Column({ default: 0})
+likesCount: number;
+
+@Column({ default: 0})
+commentsCount: number;
+
 @ManyToOne(() => User, (user) => user.posts, { onDelete: 'CASCADE'})
 user: User;
 
@@ -29,4 +38,16 @@ categories: Category[]
 
 @Column({ type: 'timestamp', default: () => 'CURRENT_TIMESTAMP'})
 created: Date;
+
+incrementViewCount() {
+    this.views += 1;
 }
+incrementLikeCount() {
+    this.likesCount += 1;
+}
+incrementCommentCount() {
+    this.commentsCount += 1;
+  }
+}
+
+

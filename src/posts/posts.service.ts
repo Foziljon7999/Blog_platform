@@ -73,4 +73,40 @@ export class PostsService {
       throw new NotFoundException(`Post with ID ${id} not found`);
     }
   }
+
+  async viewPost(postId: number): Promise<Post> {
+    const post = await this.postRepository.findOne({ where: { id: postId }});
+    if (!post) {
+      throw new Error('Post not found');
+    }
+    post.incrementViewCount();
+    return this.postRepository.save(post);
+  }
+
+  async likePost(postId: number): Promise<Post> {
+    const post = await this.postRepository.findOne({ where: { id: postId }})
+    if(!post) {
+      throw new Error('Post not found')
+    }
+    post.incrementLikeCount()
+    return this.postRepository.save(post)
+  }
+
+  async addCommentToPost(postId: number): Promise<Post> {
+    const post = await this.postRepository.findOne({ where: { id: postId }})
+    if(!post) {
+      throw new Error('Post not found')
+    }
+    post.incrementCommentCount()
+    return this.postRepository.save(post)
+  }
+
+  async GetTopPosts(): Promise<Post[]> {
+    return this.postRepository.find({ 
+      order: {
+        views: 'DESC'
+      },
+      take: 5
+    })
+  }
 }
