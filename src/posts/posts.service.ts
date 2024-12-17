@@ -109,4 +109,8 @@ export class PostsService {
       take: 5
     })
   }
+
+  async getShareUrl(postId: number): Promise<string> {
+    return `http://localhost:3000/posts/${postId}`;
+  }
 }

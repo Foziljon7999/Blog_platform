@@ -1,3 +1,4 @@
+import { Bookmark } from "src/bookmark/entities/bookmark.entity";
 import { Category } from "src/category/entities/category.entity";
 import { Comment } from "src/comment/entities/comment.entity";
 import { Like } from "src/like/entities/like.entity";
@@ -39,6 +40,9 @@ categories: Category[];
 
 @OneToMany(() => Vote, (vote) => vote.post)
 votes: Vote[];
+
+@OneToMany(() => Bookmark, (bookmark) => bookmark.post)
+bookmarks: Bookmark[];
 
 @Column({ default: 0})
 popularity: number;

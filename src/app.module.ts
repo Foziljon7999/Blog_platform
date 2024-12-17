@@ -22,6 +22,8 @@ import { VoteModule } from './vote/vote.module';
 import { Vote } from './vote/entities/vote.entity';
 import { AnnouncementModule } from './announcement/announcement.module';
 import { Announcement } from './announcement/entities/announcement.entity';
+import { BookmarkModule } from './bookmark/bookmark.module';
+import { Bookmark } from './bookmark/entities/bookmark.entity';
 
 @Module({
   imports: [TypeOrmModule.forRoot({
@@ -31,7 +33,7 @@ import { Announcement } from './announcement/entities/announcement.entity';
     type: 'postgres',
     password: '1111',
     database: 'blog',
-    entities: [User, Post, Comment, Like, Category, Profile, Follower, Vote, Announcement],
+    entities: [User, Post, Comment, Like, Category, Profile, Follower, Vote, Announcement, Bookmark],
     synchronize: true
   }),
 UsersModule,
@@ -44,7 +46,8 @@ ProfileModule,
 FollowersModule,
 StatisticsModule,
 VoteModule,
-AnnouncementModule
+AnnouncementModule,
+BookmarkModule
 ],
   controllers: [AppController],
   providers: [AppService],

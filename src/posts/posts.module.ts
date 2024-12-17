@@ -13,5 +13,6 @@ UsersModule
 ],
   controllers: [PostsController],
   providers: [PostsService],
+  exports: [PostsService]
 })
 export class PostsModule {}

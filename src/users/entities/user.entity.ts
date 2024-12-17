@@ -1,3 +1,4 @@
+import { Bookmark } from "src/bookmark/entities/bookmark.entity";
 import { Comment } from "src/comment/entities/comment.entity";
 import { Follower } from "src/followers/entities/follower.entity";
 import { Like } from "src/like/entities/like.entity";
@@ -50,6 +51,9 @@ export class User {
 
     @OneToMany(() => Follower, (follower) => follower.follower, { cascade: true})
     following: Follower[];
+
+    @OneToMany(() => Bookmark, (bookmark) => bookmark.user)
+    bookmarks: Bookmark[];
 
     @CreateDateColumn()
     createdAt: Date;
