@@ -3,6 +3,7 @@ import { Follower } from "src/followers/entities/follower.entity";
 import { Like } from "src/like/entities/like.entity";
 import { Post } from "src/posts/entities/post.entity";
 import { Profile } from "src/profile/entities/profile.entity";
+import { Vote } from "src/vote/entities/vote.entity";
 import { Column, CreateDateColumn, Entity, JoinColumn, OneToMany, OneToOne, PrimaryGeneratedColumn } from "typeorm";
 
 @Entity('users')
@@ -36,6 +37,9 @@ export class User {
 
     @OneToMany(() => Like, (likes) => likes.user)
     likes: Like[];
+
+    @OneToMany(() => Vote, (votes) => votes.user)
+    votes: Vote[];
 
     @OneToOne(() => Profile, (profile) => profile.user, { cascade: true})
     @JoinColumn()

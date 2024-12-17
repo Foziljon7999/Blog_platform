@@ -2,6 +2,7 @@ import { Category } from "src/category/entities/category.entity";
 import { Comment } from "src/comment/entities/comment.entity";
 import { Like } from "src/like/entities/like.entity";
 import { User } from "src/users/entities/user.entity";
+import { Vote } from "src/vote/entities/vote.entity";
 import { Column, Entity, ManyToMany, ManyToOne, OneToMany, PrimaryGeneratedColumn } from "typeorm";
 
 @Entity()
@@ -34,7 +35,13 @@ comments: Comment[];
 likes: Like[];
 
 @ManyToMany(() => Category, (category) => category.posts)
-categories: Category[]
+categories: Category[];
+
+@OneToMany(() => Vote, (vote) => vote.post)
+votes: Vote[];
+
+@Column({ default: 0})
+popularity: number;
 
 @Column({ type: 'timestamp', default: () => 'CURRENT_TIMESTAMP'})
 created: Date;
