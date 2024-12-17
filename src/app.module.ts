@@ -17,6 +17,7 @@ import { ProfileModule } from './profile/profile.module';
 import { Profile } from './profile/entities/profile.entity';
 import { FollowersModule } from './followers/followers.module';
 import { Follower } from './followers/entities/follower.entity';
+import { StatisticsModule } from './statistics/statistics.module';
 
 @Module({
   imports: [TypeOrmModule.forRoot({
@@ -36,7 +37,8 @@ CommentModule,
 LikeModule,
 CategoryModule,
 ProfileModule,
-FollowersModule
+FollowersModule,
+StatisticsModule
 ],
   controllers: [AppController],
   providers: [AppService],

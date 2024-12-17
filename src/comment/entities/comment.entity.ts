@@ -10,7 +10,7 @@ id: number;
 @Column()
 text: string;
 
-@ManyToOne(() => User, (user) => user.comments)
+@ManyToOne(() => User, (user) => user.comments, { onDelete: 'CASCADE'})
 user: User
 
 @ManyToOne(() => Post, (post) => post.comments, { onDelete: 'CASCADE'})

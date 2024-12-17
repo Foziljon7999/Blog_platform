@@ -15,13 +15,13 @@ title: string;
 @Column()
 content: string;
 
-@ManyToOne(() => User, (user) => user.posts)
+@ManyToOne(() => User, (user) => user.posts, { onDelete: 'CASCADE'})
 user: User;
 
 @OneToMany(() => Comment, (comment) => comment.post)
 comments: Comment[];
 
-@OneToMany(() => Like, (likes) => likes.post)
+@OneToMany(() => Like, (like) => like.post)
 likes: Like[];
 
 @ManyToMany(() => Category, (category) => category.posts)
