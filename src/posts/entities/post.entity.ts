@@ -47,6 +47,9 @@ bookmarks: Bookmark[];
 @Column({ default: 0})
 popularity: number;
 
+@Column({ default: 'active' })
+status: string;
+
 @Column({ type: 'timestamp', default: () => 'CURRENT_TIMESTAMP'})
 created: Date;
 

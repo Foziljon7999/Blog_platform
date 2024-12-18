@@ -26,6 +26,7 @@ import { BookmarkModule } from './bookmark/bookmark.module';
 import { Bookmark } from './bookmark/entities/bookmark.entity';
 import { UserPreferencesModule } from './user_preferences/user_preferences.module';
 import { UserPreference } from './user_preferences/entities/user_preference.entity';
+import { AdminPanelModule } from './admin_panel/admin_panel.module';
 
 @Module({
   imports: [TypeOrmModule.forRoot({
@@ -50,7 +51,8 @@ StatisticsModule,
 VoteModule,
 AnnouncementModule,
 BookmarkModule,
-UserPreferencesModule
+UserPreferencesModule,
+AdminPanelModule
 ],
   controllers: [AppController],
   providers: [AppService],

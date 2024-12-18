@@ -1,6 +1,5 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete, Req, UseGuards } from '@nestjs/common';
+import { Controller, Get, Post, Body, Req, UseGuards } from '@nestjs/common';
 import { UserPreferencesService } from './user_preferences.service';
-import { CreateUserDto } from 'src/users/dto/create-user.dto';
 import { CreateUserPreferenceDto } from './dto/create-user_preference.dto';
 import { AuthGuard } from 'src/auth/auth.guard';
 

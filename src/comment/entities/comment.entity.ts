@@ -24,4 +24,7 @@ parent: Comment;
 
 @OneToMany(() => Comment, (comment) => comment.parent)
 replies: Comment[];
+
+@Column({ default: 'active'})
+status: string;
 }

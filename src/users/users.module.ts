@@ -6,13 +6,13 @@ import { User } from './entities/user.entity';
 import { Post } from 'src/posts/entities/post.entity';
 import { Like } from 'src/like/entities/like.entity';
 import { Profile } from 'src/profile/entities/profile.entity';
-import { ProfileModule } from 'src/profile/profile.module';
 import { Follower } from 'src/followers/entities/follower.entity';
 
 @Module({
   imports: [TypeOrmModule.forFeature([User, Post, Like, Profile, Follower])],
   controllers: [UsersController],
   providers: [UsersService],
+  exports: [TypeOrmModule]
   
 })
 export class UsersModule {}

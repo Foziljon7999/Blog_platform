@@ -55,6 +55,12 @@ export class User {
     @OneToMany(() => Bookmark, (bookmark) => bookmark.user)
     bookmarks: Bookmark[];
 
+    @Column({ default: 'active'})
+    status: string;
+
+    @Column({ default: ''})
+    reason: string;
+
     @CreateDateColumn()
     createdAt: Date;
 }
